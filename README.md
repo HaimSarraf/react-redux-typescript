@@ -1,15 +1,30 @@
-first : 
+# React + TypeScript + Vite
 
-To better run the app,
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-1- right-click on "server" folder;
-2- choose "Open In Terminal" (or in code-editor => "Open In Integrated Terminal");
-3- in the opened terminal, type down : "npx json-server db.json"
+Currently, two official plugins are available:
 
-second : 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-now the local server is runnuig in the background and you can run the app.
-since this is a "vite-typescript" app, to run it,
+## Expanding the ESLint configuration
 
-1- open new terminal in main-folder (or in your code-editor right-click on "supermarket-project-typescript" and choose "Open In Integrated Terminal")
-2- type down : "npm run dev"
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
