@@ -9,8 +9,13 @@ import "./Breads.scss";
 
 const Breads = () => {
   const allProducts = useSelector((state: RootState) => state.product.products);
+  const cartItems = useSelector((state: RootState) => state.product.cartItems);
 
   const selectedProducts = allProducts.filter(
+    (product) => product.category === "bread"
+  );
+
+  const selectedCartItems = cartItems.filter(
     (product) => product.category === "bread"
   );
 
@@ -34,7 +39,17 @@ const Breads = () => {
                   >
                     -
                   </button>
-                  <p>{product.quantity}</p>
+                  {selectedCartItems.find((item) => item.id === product.id) ? (
+                    <p>
+                      {
+                        selectedCartItems.find((item) => item.id === product.id)
+                          ?.quantity
+                      }
+                    </p>
+                  ) : (
+                    <p>{product.quantity}</p>
+                  )}
+
                   <button
                     onClick={() => {
                       dispatch(increaseQuantity(product.id));
