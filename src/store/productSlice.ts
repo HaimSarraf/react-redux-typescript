@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductSliceType } from "../types/types";
+import { Product, ProductSliceType } from "../types/types";
 import products from "../../server/db.json";
 
 const fruits = products.products.fruit;
@@ -8,9 +8,14 @@ const meats = products.products.meat;
 
 const allProducts = fruits.concat(breads).concat(meats);
 
+const items: Product[] =
+  localStorage.getItem("cart-item") !== null
+    ? JSON.parse(localStorage.getItem("cart-item")!)
+    : [];
+
 const initialState: ProductSliceType = {
   products: allProducts,
-  cartItems: [],
+  cartItems: items,
 };
 
 const productSlice = createSlice({
@@ -54,7 +59,8 @@ const productSlice = createSlice({
 
       const product = state.products.find((item) => item.id === itemId);
       const cartProduct = state.cartItems.find((item) => item.id === itemId);
-
+      
+      
       if (product!.quantity === 0) {
         alert("Please Click On + First");
       } else if (product!.quantity > 0) {
@@ -72,10 +78,15 @@ const productSlice = createSlice({
               product!.quantity
             }" ${" x "} "${product!.title.toUpperCase()}" Succesfully Added To Cart`
           );
+
           state.cartItems = state.cartItems.concat(product!);
+
+          localStorage.setItem(
+            "cart-item",
+            JSON.stringify(state.cartItems.map((item) => item))
+          );
         }
       }
-      // }
     },
 
     removeProductFromCart: (state, action) => {
@@ -90,12 +101,21 @@ const productSlice = createSlice({
       const product = state.products.find((item) => item.id === itemId);
 
       product!.quantity = 0;
+
+      localStorage.setItem(
+        "cart-item",
+        JSON.stringify(
+          state.cartItems.filter((item) => item.id !== product!.id)
+        )
+      );
     },
 
     clearCart: (state) => {
       state.cartItems = [];
 
       state.products.map((item) => (item.quantity = 0));
+
+      localStorage.clear();
     },
 
     increaseCartQuantity: (state, action) => {
@@ -105,6 +125,16 @@ const productSlice = createSlice({
       const product = state.products.find((item) => item.id === itemId);
 
       cartProduct!.quantity = cartProduct!.quantity + 1;
+
+      localStorage.setItem(
+        "cart-item",
+        JSON.stringify(
+          state.cartItems.map((item) => {
+            return { ...item, quantity: item.quantity };
+          })
+        )
+      );
+
       product!.quantity = cartProduct!.quantity;
     },
 
@@ -124,6 +154,16 @@ const productSlice = createSlice({
         product!.quantity = 0;
       } else if (cartProduct!.quantity > 1) {
         cartProduct!.quantity = cartProduct!.quantity - 1;
+
+        localStorage.setItem(
+          "cart-item",
+          JSON.stringify(
+            state.cartItems.map((item) => {
+              return { ...item, quantity: item.quantity };
+            })
+          )
+        );
+
         product!.quantity = cartProduct!.quantity;
       }
     },
