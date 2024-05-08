@@ -9,6 +9,11 @@ import "./Fruits.scss";
 
 const Fruits = () => {
   const allProducts = useSelector((state: RootState) => state.product.products);
+  const cartItems = useSelector((state: RootState) => state.product.cartItems);
+
+  const selectedCartItems = cartItems.filter(
+    (product) => product.category === "fruit"
+  );
 
   const selectedProducts = allProducts.filter(
     (product) => product.category === "fruit"
@@ -34,7 +39,16 @@ const Fruits = () => {
                   >
                     -
                   </button>
-                  <p>{product.quantity}</p>
+                  {selectedCartItems.find((item) => item.id === product.id) ? (
+                    <p>
+                      {
+                        selectedCartItems.find((item) => item.id === product.id)
+                          ?.quantity
+                      }
+                    </p>
+                  ) : (
+                    <p>{product.quantity}</p>
+                  )}
                   <button
                     onClick={() => {
                       dispatch(increaseQuantity(product.id));
