@@ -15,19 +15,21 @@ export type CartItemType = {
   title: string;
   src: string;
   price: number;
-  category?: string;
+  category: string;
   // isExisting:boolean
 };
 
-export type ProductSliceType = {
+export type ProductInitialType = {
   products: Product[];
   cartItems:CartItemType[];
+  searchedProducts:Product[]
+  amount:number;
+  totalPrice:number;
 };
 
 export type CartInitialStateType = {
   products: Product[];
-  amount: number;
-  total: number;
+
 };
 
 export type ModalInitialType = {
@@ -46,3 +48,17 @@ export type ModalOverlayType = {
 export type BackdropType = {
   onClose: React.MouseEventHandler<HTMLDivElement> | undefined;
 };
+
+export type DarkThemeState = {
+  dark : boolean
+}
+
+
+export type CategoriesType = {
+  category :  "ALL" | "MEATS" | "BREADS" | "FRUITS"
+}
+
+
+export type SearchInitialStateType = {
+  products: Product[]
+}

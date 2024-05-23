@@ -1,0 +1,29 @@
+.form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+
+  .input {
+    background-color: white;
+    color: black;
+    height: 32px;
+
+    border: none;
+  }
+
+  .right-button {
+    border-color: black;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    color: black;
+  }
+
+  .left-button {
+    height: 32px;
+    border-color: black;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    color:red
+  }
+}

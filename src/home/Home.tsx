@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 import Cart from "../cart/Cart";
 import "./Home.scss";
 
+
 const Home = () => {
-  const cartIsVisible = useSelector((state: RootState) => state.modal.isOpen);
+  const cartIsVisible = useSelector((isOpen:RootState)=>isOpen.modal.isOpen);
 
   return (
     <div className="home">

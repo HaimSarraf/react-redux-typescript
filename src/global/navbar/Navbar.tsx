@@ -1,13 +1,19 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import DarkMode from "@mui/icons-material/DarkMode";
 import { useSelector, useDispatch } from "react-redux";
-import { openModal, closeModal } from "../../store/modalSlice";
+import { openModal, closeModal } from "../../container/modal/modalSlice";
+import { setDark, setLight } from "../../container/dark-theme/darkThemeSlice";
 import { RootState } from "../../store/store";
 import "./Navbar.scss";
+import { LightMode } from "@mui/icons-material";
+import Search from "../search/Search";
 
 const Navbar = () => {
   const cartIsVisible = useSelector((state: RootState) => state.modal.isOpen);
+
+  const isDarkTheme = useSelector((state: RootState) => state.darkTheme.dark);
+
+  const totalAmount = useSelector((state: RootState) => state.product.amount);
 
   const dispatch = useDispatch();
 
@@ -19,17 +25,31 @@ const Navbar = () => {
     }
   };
 
+  const toggleTheme = () => {
+    if (isDarkTheme) {
+      dispatch(setDark());
+    } else {
+      dispatch(setLight());
+    }
+  };
+
   return (
     <div className="navbar">
       <div className="wrapper">
         <div className="left">
-          <StorefrontIcon />
+          {isDarkTheme ? (
+            <LightMode onClick={toggleTheme} />
+          ) : (
+            <DarkMode onClick={toggleTheme} />
+          )}
         </div>
         <div className="center">
-          <FavoriteIcon />
-          <p>Healthy Products For You</p>
+          <div className="search-box">
+            <Search />
+          </div>
         </div>
         <div className="right">
+          <button className="totalAmount">{totalAmount}</button>
           <ShoppingCartIcon onClick={toggleCart} />
         </div>
       </div>

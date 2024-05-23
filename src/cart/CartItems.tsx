@@ -1,11 +1,13 @@
 import { CartItemType } from "../types/types";
 import { useDispatch } from "react-redux";
-import { removeProductFromCart } from "../store/productSlice";
-import { increaseCartQuantity,decreaseCartQuantity } from "../store/productSlice";
+import { removeProductFromCart } from "../container/product/productSlice";
+import {
+  increaseCartQuantity,
+  decreaseCartQuantity,
+} from "../container/product/productSlice";
 import "./CartItem.scss";
 
 const CartItems = ({ id, src, title, price, quantity }: CartItemType) => {
-
   const dispatch = useDispatch();
 
   return (
@@ -23,8 +25,10 @@ const CartItems = ({ id, src, title, price, quantity }: CartItemType) => {
             </button>
 
             <h4>
-              <span>PRICE : {"   "}</span>
-              {quantity} * {price} $
+              <div style={{ fontSize: "8px", color: "grey" }}>
+                ({quantity} x {price}$){" "}
+              </div>
+              {quantity * price}$
             </h4>
 
             <button

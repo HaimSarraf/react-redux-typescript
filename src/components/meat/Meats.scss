@@ -3,19 +3,21 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 
 
   .container {
-    display: table-column;
+    // display: table-column;
 
     .product {
       font-size: 12px;
+      background-color: #fdffe4;
+      font-weight: 900;
       width: 30vw;
       height: 300px;
       margin-bottom: 10px;
       padding: 0;
-      border: 1px solid red;
+      border: 1px solid rgb(206, 194, 206);
       border-radius: 35px;
 
       img {
@@ -24,21 +26,31 @@
         object-fit:  fill;
         border-radius: 20%;
       }
+
+      img:hover{
+        width: 65%;
+        height: 52%;
+        border-radius: 0;
+      }
+
       .buttons {
-        // border: red 1px solid;
         
         .topButtons{
+          
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 30px;
+          gap: 50px;
+          
           
         }
         
         button {
-          // border: none;
-          border-radius: 5px;
-          background-color: #e0c4fa;
+          font-size: 18px;
+          border: none;
+          border-radius: 15px;
+          color: white;
+          background-color: #0b8747;
         }
 
         .bottomButtons{
@@ -52,3 +64,69 @@
     }
   }
 }
+
+
+.dark{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  
+
+
+  .container {
+    display: table-column;
+
+    .product {
+      font-size: 12px;
+      font-weight: 900;
+      width: 30vw;
+      height: 300px;
+      margin-bottom: 10px;
+      padding: 0;
+      border: 1px solid rgb(85, 72, 85);
+      border-radius: 35px;
+
+      img {
+        width: 60%;
+        height: 50%;
+        object-fit:  fill;
+        border-radius: 20%;
+      }
+
+      img:hover{
+        width: 65%;
+        height: 52%;
+        border-radius: 0;
+      }
+      .buttons {
+        
+        .topButtons{
+          
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 50px;
+          
+          
+        }
+        
+        button {
+          font-size: 18px;
+          border: none;
+          border-radius: 15px;
+          color: white;
+          background-color: #0b8747;
+        }
+
+        .bottomButtons{
+          button{
+            background-color: blue;
+            color: white;
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }}

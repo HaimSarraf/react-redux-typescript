@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productSlice from "./productSlice";
-import modalSlice from "./modalSlice";
-import cartSlice from "./cartSlice";
+import { productSlice } from "../container/product/productSlice";
+import { modalSlice } from "../container/modal/modalSlice";
+import { cartSlice } from "../container/cart/cartSlice";
+import { darkThemeSlice } from "../container/dark-theme/darkThemeSlice";
+import { categorySlice } from "../container/category/categorySlice";
 
 export const store = configureStore({
   reducer: {
-    product: productSlice,
-    modal: modalSlice,
-    cart: cartSlice,
+    product: productSlice.reducer,
+    modal: modalSlice.reducer,
+    cart: cartSlice.reducer,
+    darkTheme: darkThemeSlice.reducer,
+    category: categorySlice.reducer,
   },
 });
 

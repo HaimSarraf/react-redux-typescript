@@ -4,12 +4,14 @@ import {
   addToCart,
   increaseQuantity,
   decreaseQuantity,
-} from "../../store/productSlice";
-import "./Fruits.scss";
+} from "../../container/product/productSlice";
+// import "./Fruits.scss";
 
 const Fruits = () => {
   const allProducts = useSelector((state: RootState) => state.product.products);
   const cartItems = useSelector((state: RootState) => state.product.cartItems);
+  const isDarkTheme = useSelector((state: RootState) => state.darkTheme.dark);
+
 
   const selectedCartItems = cartItems.filter(
     (product) => product.category === "fruit"
@@ -24,7 +26,7 @@ const Fruits = () => {
   return (
     <div>
       {selectedProducts.map((product) => (
-        <div className="products" key={product.id}>
+        <div className={isDarkTheme?"dark":"products"} key={product.id}>
           <div className="container">
             <div className="product">
               <p>{product.title.toUpperCase()}</p>

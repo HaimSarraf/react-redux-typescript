@@ -2,19 +2,17 @@ import CartItems from "./CartItems";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import Modal from "../modal/Modal";
-import { closeModal } from "../store/modalSlice";
-import { clearCart } from "../store/productSlice";
+import { closeModal } from "../container/modal/modalSlice";
+import { clearCart } from "../container/product/productSlice";
 import "./Cart.scss";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((store: RootState) => store.product.cartItems);
-  const total = useSelector((store:RootState)=>store.product.cartItems)
 
-  let totalPrice = 0 
-
-  total.forEach(item=> totalPrice += item.quantity * item.price)
-
+  const cartItems = useSelector(
+    (products: RootState) => products.product.cartItems
+  );
+  
   const hideModal = () => {
     dispatch(closeModal());
   };
@@ -44,15 +42,11 @@ const Cart = () => {
           })}
         </div>
         <div>
-          <h5>Total Price : {totalPrice}</h5>
-        </div>
-        <div>
           <button className="clearCart" onClick={() => dispatch(clearCart())}>
             CLEAR CART
           </button>
           <br />
           <br />
-          {/* <button onClick={() => hideModal()}>close cart</button> */}
         </div>
       </div>
     </Modal>

@@ -1,52 +1,117 @@
 .products {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
-    
-    .container {
-      display: table-column;
-      
-      .product {
-        background-color: #fafdc8;
-        font-size: 12px;
-        width: 30vw;
-        gap: 20px;
-        border: 1px solid rgb(179, 147, 147);
-        border-radius: 5px;
-  
-        img {
-          width: 80px;
-          height: 80px;
-          object-fit: cover;
-          border-radius: 20%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+
+
+  .container {
+    display: table-column;
+
+    .product {
+      font-size: 12px;
+      font-weight: 900;
+      width: 30vw;
+      height: 300px;
+      margin-bottom: 10px;
+      padding: 0;
+      border: 1px solid rgb(228, 105, 228);
+      border-radius: 35px;
+
+      img {
+        width: 60%;
+        height: 50%;
+        object-fit:  fill;
+        border-radius: 20%;
+      }
+      .buttons {
+        
+        .topButtons{
+          
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 50px;
+          
+          
         }
-        .buttons {
-          // border: red 1px solid;
-  
-          .topButtons{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            
-          }
-  
-          button {
-            border-radius: 5px;
-            background-color: #e0c4fa;
-          }
-  
-          .bottomButtons{
-            button{
-              background-color: blue;
-              color: white;
-              margin-bottom: 5px;
-            }
+        
+        button {
+          font-size: 18px;
+          border: none;
+          border-radius: 15px;
+          color: white;
+          background-color: #5ac02f;
+        }
+
+        .bottomButtons{
+          button{
+            background-color: blue;
+            color: white;
+            margin-bottom: 5px;
           }
         }
       }
     }
   }
-  
+}
+
+
+.dark{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding : 10px;
+
+
+  .container {
+    //  display: table-column;
+    margin: 0;
+    padding: 0;
+
+    .product {
+      background-color: rgb(83, 83, 83);
+      font-size: 12px;
+      font-weight: 900;
+      color: white;
+      width: 30vw;
+      height: 290px;
+      border: none;
+      border-radius: 35px;
+
+      img {
+        width: 60%;
+        height: 50%;
+        object-fit:  fill;
+        border-radius: 20%;
+      }
+      .buttons {
+        
+        .topButtons{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 60px;
+          
+        }
+        
+        button {
+          border: none;
+          font-size: 20px;
+          border-radius: 15px;
+          background-color: #e0c4fa;
+        }
+
+        .bottomButtons{
+          button{
+            background-color: rgb(255, 255, 255);
+            color: rgb(64, 34, 34);
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+}
