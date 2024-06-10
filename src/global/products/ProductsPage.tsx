@@ -1,60 +1,73 @@
-import React, { FormEvent, useState } from "react";
+import React, {  useState } from "react";
 import Breads from "../../components/bread/Breads";
 import Fruits from "../../components/fruit/Fruits";
 import Meats from "../../components/meat/Meats";
+import { useCategoryStore } from "../../container/category/categorySlice";
+import { category } from "../../types/types";
 import "./ProductsPage.scss";
 
 const MainPage = () => {
-  const [selectedProduct, setSelectedProduct] = useState("ALL");
+  const { setCategory } = useCategoryStore();
+  const selectedCategory = useCategoryStore((state) => state.category);
 
   let defaultContent = (
     <div className="bottom">
       <div className="right">
-        <p className="categoryName">MEAT</p>
         <Meats />
       </div>
       <div className="center">
-        <p className="categoryName">BREAD</p>
         <Breads />
       </div>
       <div className="left">
-        <p className="categoryName">FRUIT</p>
         <Fruits />
       </div>
     </div>
   );
 
-  if (selectedProduct === "MEATS") {
+  const categoryMap: Record<string, category> = {
+    ALL: category.ALL,
+    MEATS: category.MEATS,
+    BREADS: category.BREADS,
+    FRUITS: category.FRUITS,
+  };
+
+  if (selectedCategory === categoryMap["MEATS"]) {
     defaultContent = (
       <div className="wide">
-        <p className="categoryName">MEAT</p>
         <Meats />
       </div>
     );
-  } else if (selectedProduct === "BREADS") {
+  } else if (selectedCategory === categoryMap["BREADS"]) {
     defaultContent = (
       <div className="wide">
-        <p className="categoryName">BREAD</p>
         <Breads />
       </div>
     );
-  } else if (selectedProduct === "FRUITS") {
+  } else if (selectedCategory === categoryMap["FRUITS"]) {
     defaultContent = (
       <div className="wide">
-        <p className="categoryName">FRUIT</p>
         <Fruits />
       </div>
     );
   }
 
-  const clickHandler = (e: FormEvent) => {
-    e.preventDefault();
-    setSelectedProduct("ALL");
-  };
+  const [cat, setCat] = useState("");
+
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
-    setSelectedProduct(e.target.value);
+
+    const stringValue = e.target.value;
+    const correctValue = categoryMap[stringValue];
+
+    setCategory(correctValue);
+    setCat(stringValue);
   };
+
+  const clickHandler = () => {
+    setCategory(category.ALL);
+    setCat("ALL");
+  };
+
 
   return (
     <div className="productsPage">
@@ -65,13 +78,21 @@ const MainPage = () => {
               <label>
                 <select
                   name="choose some product"
-                  value={selectedProduct}
+                  value={cat}
                   onChange={changeHandler}
                 >
-                  <option className="option" value="ALL">ALL</option>
-                  <option className="option1" value="MEATS">MEAT</option>
-                  <option className="option2" value="BREADS">BREADS</option>
-                  <option className="option3" value="FRUITS">FRUITS</option>
+                  <option className="option" value="ALL">
+                    ALL
+                  </option>
+                  <option className="option1" value="MEATS">
+                    MEATS
+                  </option>
+                  <option className="option2" value="BREADS">
+                    BREADS
+                  </option>
+                  <option className="option3" value="FRUITS">
+                    FRUITS
+                  </option>
                 </select>
               </label>
               <button onClick={clickHandler}>Show All Products</button>

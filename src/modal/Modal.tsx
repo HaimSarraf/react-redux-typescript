@@ -1,5 +1,5 @@
-import "./Modal.css";
 import ReactDOM from "react-dom";
+import "./Modal.scss";
 
 import { ModalType, ModalOverlayType, BackdropType } from "../types/types";
 import { ReactNode } from "react";

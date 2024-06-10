@@ -1,13 +1,14 @@
 import Footer from "../global/footer/Footer";
 import Navbar from "../global/navbar/Navbar";
 import ProductsPage from "../global/products/ProductsPage";
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
 import Cart from "../cart/Cart";
+import { useModalStore } from "../container/modal/modalSlice";
 import "./Home.scss";
 
+
 const Home = () => {
-  const cartIsVisible = useSelector((state: RootState) => state.modal.isOpen);
+
+  const isOpen = useModalStore(state=>state.isOpen)
 
   return (
     <div className="home">
@@ -15,7 +16,7 @@ const Home = () => {
         <Navbar />
       </div>
       <div className="center">
-        <div className="cart">{cartIsVisible && <Cart />}</div>
+        <div className="cart">{isOpen && <Cart />}</div>
         <ProductsPage />
       </div>
       <div className="down">

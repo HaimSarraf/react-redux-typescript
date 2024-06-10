@@ -19,19 +19,15 @@ export type CartItemType = {
   // isExisting:boolean
 };
 
-export type ProductSliceType = {
-  products: Product[];
-  cartItems:CartItemType[];
-};
 
 export type CartInitialStateType = {
   products: Product[];
-  amount: number;
-  total: number;
 };
 
-export type ModalInitialType = {
+export type ModalState = {
   isOpen: boolean;
+  openModal:()=>void;
+  closeModal:()=>void;
 };
 
 export type ModalType = {
@@ -45,4 +41,37 @@ export type ModalOverlayType = {
 
 export type BackdropType = {
   onClose: React.MouseEventHandler<HTMLDivElement> | undefined;
+};
+
+export type DarkThemeState = {
+  dark: boolean;
+  setDark: () => void;
+  setLight: () => void;
+};
+
+export enum category {
+  "ALL",
+  "MEATS",
+  "BREADS",
+  "FRUITS"
+}
+
+export type CategoriesType = {
+  category: category;
+  setCategory: (category: category) => void;
+};
+
+
+export type ProductInitialType = {
+  products: Product[];
+  cartItems: Product[];
+  amount: number;
+  totalPrice: number;
+  addToCart: (id:number) => void;
+  increaseQuantity: (id: number) => void;
+  decreaseQuantity: (id: number) => void;
+  removeProductFromCart: (id: number) => void;
+  clearCart: () => void;
+  increaseCartQuantity: (id: number) => void;
+  decreaseCartQuantity: (id: number) => void;
 };

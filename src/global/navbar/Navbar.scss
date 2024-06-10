@@ -35,6 +35,20 @@
             flex: 1;
             align-items: center;
             justify-content: center;
+
+
+            .totalAmount{
+                flex:1;
+                background-color: rgb(6, 119, 248);
+                border: none;
+                border-radius: 50%;
+                width: 1.5rem;
+                height: 1.5rem;
+                position: relative;
+                top: -25px;
+                right: -35px;
+                transform: translate(25%,25%);
+            }
         }
     }
 }

@@ -1,15 +1,13 @@
-import { RootState } from "../../store/store";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addToCart,
-  increaseQuantity,
-  decreaseQuantity,
-} from "../../store/productSlice";
+import { useDarkThemeStore } from "../../container/dark-theme/darkThemeSlice";
+import { useProductStore } from "../../container/product/useProductStore";
 import "./Meats.scss";
 
 const Meats = () => {
-  const allProducts = useSelector((state: RootState) => state.product.products);
-  const cartItems = useSelector((state: RootState) => state.product.cartItems);
+  const { increaseQuantity, decreaseQuantity, addToCart } = useProductStore();
+  const allProducts = useProductStore((state) => state.products);
+  const cartItems = useProductStore((state) => state.cartItems);
+
+  const dark = useDarkThemeStore((state) => state.dark);
 
   const selectedCartItems = cartItems.filter(
     (product) => product.category === "meat"
@@ -19,12 +17,10 @@ const Meats = () => {
     (product) => product.category === "meat"
   );
 
-  const dispatch = useDispatch();
-
   return (
     <div>
       {selectedProducts.map((product) => (
-        <div className="products" key={product.id}>
+        <div className={dark ? "dark" : "products"} key={product.id}>
           <div className="container">
             <div className="product">
               <p>{product.title.toUpperCase()}</p>
@@ -34,7 +30,7 @@ const Meats = () => {
                 <div className="topButtons">
                   <button
                     onClick={() => {
-                      dispatch(decreaseQuantity(product.id));
+                      decreaseQuantity(product.id);
                     }}
                   >
                     -
@@ -51,7 +47,7 @@ const Meats = () => {
                   )}
                   <button
                     onClick={() => {
-                      dispatch(increaseQuantity(product.id));
+                      increaseQuantity(product.id);
                     }}
                   >
                     +
@@ -60,7 +56,7 @@ const Meats = () => {
                 <div className="bottomButtons">
                   <button
                     onClick={() => {
-                      dispatch(addToCart(product.id));
+                      addToCart(product.id);
                     }}
                   >
                     Add To Cart

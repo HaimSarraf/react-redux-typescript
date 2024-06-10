@@ -1,21 +1,36 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+import DarkMode from "@mui/icons-material/DarkMode";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useSelector, useDispatch } from "react-redux";
-import { openModal, closeModal } from "../../store/modalSlice";
-import { RootState } from "../../store/store";
+import { LightMode } from "@mui/icons-material";
+import { useDarkThemeStore } from "../../container/dark-theme/darkThemeSlice";
+import { useModalStore } from "../../container/modal/modalSlice";
+import { useProductStore } from "../../container/product/useProductStore";
 import "./Navbar.scss";
 
 const Navbar = () => {
-  const cartIsVisible = useSelector((state: RootState) => state.modal.isOpen);
+  const { openModal, closeModal } = useModalStore();
 
-  const dispatch = useDispatch();
+  const isOpen = useModalStore((state) => state.isOpen);
+
+  const { setDark, setLight } = useDarkThemeStore();
+
+  const dark = useDarkThemeStore((state) => state.dark);
+
+  const totalAmount = useProductStore(state=>state.amount)
 
   const toggleCart = () => {
-    if (cartIsVisible) {
-      dispatch(closeModal());
+    if (isOpen) {
+      closeModal();
     } else {
-      dispatch(openModal());
+      openModal();
+    }
+  };
+
+  const toggleTheme = () => {
+    if (!dark) {
+      setDark();
+    } else {
+      setLight();
     }
   };
 
@@ -23,13 +38,18 @@ const Navbar = () => {
     <div className="navbar">
       <div className="wrapper">
         <div className="left">
-          <StorefrontIcon />
+          {dark ? (
+            <LightMode onClick={toggleTheme} />
+          ) : (
+            <DarkMode onClick={toggleTheme} />
+          )}
         </div>
         <div className="center">
           <FavoriteIcon />
           <p>Healthy Products For You</p>
         </div>
         <div className="right">
+          <button className="totalAmount">{totalAmount}</button>
           <ShoppingCartIcon onClick={toggleCart} />
         </div>
       </div>
